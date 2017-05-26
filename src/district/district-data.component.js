@@ -1,11 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
-import {
-    Table,
-    TableBody,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
+
+import { TableDataComponent } from './table-data.component';
 
 export class DistrictDataComponent extends React.Component {
 
@@ -28,32 +24,9 @@ export class DistrictDataComponent extends React.Component {
                     actAsExpander={true}
                     showExpandableButton={true}
                 />
-                <CardTitle title={this.props.AreaName} subtitle="Area Name" expandable={true} />
+                <CardTitle title={this.props.AreaName} subtitle={this.props.TotalRuralUrban} expandable={true} />
                 <CardText expandable={true}>
-                    <Table>
-                        <TableBody displayRowCheckbox={false} >
-                            <TableRow>
-                                <TableRowColumn>Total Children Ever Born Female</TableRowColumn>
-                                <TableRowColumn>{this.props.TotalChildrenEverBornFemale}</TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>Total Children Ever Born Male</TableRowColumn>
-                                <TableRowColumn>{this.props.TotalChildrenEverBornMale}</TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>Total Children Ever Born Persons</TableRowColumn>
-                                <TableRowColumn>{this.props.TotalChildrenEverBornPersons}</TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>Total Ever Married Women</TableRowColumn>
-                                <TableRowColumn>{this.props.TotalEverMarriedWomen}</TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>Total Women</TableRowColumn>
-                                <TableRowColumn>{this.props.TotalWomen}</TableRowColumn>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
+                    <TableDataComponent {...this.props}></TableDataComponent>
                 </CardText>
             </Card>
         );
