@@ -23,11 +23,11 @@ export class DataStore {
             return response.json();
           })
           .then(function (json) {
-            const result = json.results.find(address => {
-              return address.types.indexOf('administrative_area_level_2') > -1;
+            const result = json.results[0].address_components.find(address => {
+              return address.types.indexOf('locality') > -1;
             });
             data = json.results;
-            return result.address_components[0].long_name;
+            return result ? result.long_name : '';
           });
     }
 }

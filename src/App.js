@@ -73,7 +73,7 @@ class App extends Component {
   }
 
   render() {
-    const distictsEl = this.state.districts.map((district) => <DistrictDataComponent {...district} key={district.id}></DistrictDataComponent>);
+    const distictsEl = this.state.districts.map((district, index) => <DistrictDataComponent {...district} key={district.id} expanded={index === 0}></DistrictDataComponent>);
     return (
       <MuiThemeProvider >
         <div style={{ 'display': 'flex', 'flexDirection': 'column' }}>

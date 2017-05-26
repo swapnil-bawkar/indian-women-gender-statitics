@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
-
 import { TableDataComponent } from './table-data.component';
 
 export class DistrictDataComponent extends React.Component {
@@ -8,7 +7,7 @@ export class DistrictDataComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: false,
+            expanded: props.expanded,
         };
     }
     handleExpandChange = (expanded) => {
@@ -16,7 +15,7 @@ export class DistrictDataComponent extends React.Component {
     };
 
     render() {
-        const title = `Present Age - ${this.props.PresentAge}`;
+        const title = `${this.props.PresentAge} : ${this.props.TotalRuralUrban}`;
         return (
             <Card style={{ 'margin': '0 8px' }} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
                 <CardHeader
@@ -24,7 +23,7 @@ export class DistrictDataComponent extends React.Component {
                     actAsExpander={true}
                     showExpandableButton={true}
                 />
-                <CardTitle title={this.props.AreaName} subtitle={this.props.TotalRuralUrban} expandable={true} />
+                <CardTitle title={this.props.TotalRuralUrban} subtitle={this.props.AreaName} expandable={true} />
                 <CardText expandable={true}>
                     <TableDataComponent {...this.props}></TableDataComponent>
                 </CardText>
