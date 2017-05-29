@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'whatwg-fetch';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
@@ -12,7 +14,7 @@ import './index.css';
 injectTapEventPlugin();
 
 function renderApp(json) {
-    ReactDOM.render(<App />, document.getElementById('root'));
+    ReactDOM.render(<MuiThemeProvider><App /></MuiThemeProvider>, document.getElementById('root'));
 }
 renderApp();
 registerServiceWorker();
