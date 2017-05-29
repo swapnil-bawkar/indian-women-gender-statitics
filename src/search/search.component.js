@@ -12,17 +12,22 @@ export const SearchComponent = (props) => {
     const ageMenus = props.presentAges.map((age, index) => {
         return <MenuItem value={age} primaryText={age} key={index}/>
     });
+    const keyDown = function(event) {
+        if(event.keyCode === 13) {
+            props.onSearchClick();
+        }
+    };
     return (
-        <Card style={{ 'margin': '8px', 'display': 'flex', 'flex': '1 1 auto', 'flexDirection': 'column' }} className="card-wrapper">
+        <Card style={{ 'margin': '8px', 'display': 'flex', 'flex': '1 0 auto', 'flexDirection': 'column' }} className="card-wrapper">
             <div style={{ 'display': 'flex', 'alignItems': 'baseline', 'flex': '1 1 auto' }}>
                 <CardText style={{ 'display': 'flex', 'flex': '1 1 auto' }}>
                     <TextField hintText="District Name" style={{ 'flex': '1 1 80%', 'width': 'auto' }}
-                        onChange={props.onTextChange} value={props.districtName} />
+                        onChange={props.onTextChange} value={props.districtName} onKeyDown={keyDown}/>
                 </CardText>
                 <CardActions>
                     <RaisedButton style={{ 'minWidth': '50px' }} onClick={props.onSearchClick} onTouchTap={props.onSearchClick}
                         icon={<ActionSearch />}
-                        secondary={true}
+                        primary={true}
                     />
                 </CardActions>
             </div>

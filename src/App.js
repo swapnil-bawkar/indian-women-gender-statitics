@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import CircularProgress from 'material-ui/CircularProgress';
+import { Card, CardHeader, CardTitle } from 'material-ui/Card';
+import Paper from 'material-ui/Paper';
 
 import './App.css';
 import { SearchComponent } from './search/search.component';
@@ -73,20 +75,33 @@ class App extends Component {
   }
 
   render() {
-    const distictsEl = this.state.districts.map((district) => <DistrictDataComponent {...district} key={district.id}></DistrictDataComponent>);
+    let districtEl = null;
+    if (this.state.districts.length > 0) {
+      districtEl = this.state.districts.map((district) => <DistrictDataComponent {...district} key={district.id}></DistrictDataComponent>);
+    } else {
+      districtEl =
+        <Card style={{ 'margin': '0 8px' }}>
+          <CardHeader
+            title={this.state.districtText}
+          />
+          <CardTitle title='Data not found!' />
+        </Card>;
+    }
     return (
-      <MuiThemeProvider >
-        <div style={{ 'display': 'flex', 'flexDirection': 'column' }}>
-          <SearchComponent onSearchClick={this.searchDistrict} onTextChange={this.onDistrictChange}
-            districtName={this.state.districtText} onAgeChange={this.onAgeChange}
-            age={this.state.age} presentAges={this.state.presentAges}></SearchComponent>
-          {this.state.spinner &&
-            <div style={{ 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center' }}>
-              <CircularProgress style={{ 'position': 'absolute', 'top': '50%', 'left': '50%' }} size={80} thickness={5} />
-            </div>
-          }
-          {this.state.districts.length > 0 && distictsEl}
-        </div>
+      <MuiThemeProvider>
+        <Paper zDepth={1} style={{ 'display': 'flex', 'flexDirection': 'column', 'height': '100%' }}>
+          <div style={{ 'display': 'flex', 'flexDirection': 'column' }}>
+            <SearchComponent onSearchClick={this.searchDistrict} onTextChange={this.onDistrictChange}
+              districtName={this.state.districtText} onAgeChange={this.onAgeChange}
+              age={this.state.age} presentAges={this.state.presentAges}></SearchComponent>
+            {this.state.spinner &&
+              <div style={{ 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center' }}>
+                <CircularProgress style={{ 'position': 'absolute', 'top': '50%', 'left': '50%' }} size={80} thickness={5} />
+              </div>
+            }
+            {districtEl}
+          </div>
+        </Paper>
       </MuiThemeProvider>
     );
   }
