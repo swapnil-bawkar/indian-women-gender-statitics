@@ -9,6 +9,7 @@ import './App.css';
 import { SearchComponent } from './search/search.component';
 import { DataStore } from './common/datastore';
 import { DistrictListComponent } from './district/district-list.component';
+import { AboutComponent } from './about/about.component';
 
 class App extends Component {
 
@@ -18,7 +19,8 @@ class App extends Component {
     spinner: false,
     activeData: [],
     age: 'All Ages',
-    presentAges: []
+    presentAges: [],
+    showDialog: false
   }
 
   constructor() {
@@ -78,10 +80,23 @@ class App extends Component {
   render() {
     return (
       <Paper zDepth={1} style={{ 'display': 'flex', 'flexDirection': 'column', 'flex': '1 0 auto' }}>
+        {this.state.showDialog && 
+          <AboutComponent 
+            handleClose={() => {
+              this.setState({
+                showDialog: !this.state.showDialog
+              })
+            }}
+          ></AboutComponent>}
         <div style={{ 'display': 'flex', 'flexDirection': 'column' }}>
           <AppBar style={{ flex: '1 0 auto' }}
             iconElementLeft={<IconButton><ActionHelp /></IconButton>}
-            title="Women Statisticks in Maharashtra"
+            title="Women Statistics in Maharashtra"
+            onLeftIconButtonTouchTap={() => {
+              this.setState({
+                showDialog: !this.state.showDialog
+              })
+            }}
           />
           <SearchComponent onSearchClick={this.searchDistrict} onTextChange={this.onDistrictChange}
             districtName={this.state.districtText} onAgeChange={this.onAgeChange}
