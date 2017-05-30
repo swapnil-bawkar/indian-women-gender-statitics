@@ -67,9 +67,10 @@ class App extends Component {
       });
   }
 
-  onDistrictChange(event) {
-    const value = event.target.value;
-    this.setState(Object.assign({}, this.state, { districtText: value }));
+  onDistrictChange(searchText) {
+    searchText = searchText.charAt(0).toUpperCase() + searchText.substr(1);
+    this.setState(Object.assign({}, this.state, { districtText: searchText }));
+    this.searchDistrict();
   }
 
   onAgeChange(event, index, value) {
@@ -100,7 +101,8 @@ class App extends Component {
           />
           <SearchComponent onSearchClick={this.searchDistrict} onTextChange={this.onDistrictChange}
             districtName={this.state.districtText} onAgeChange={this.onAgeChange}
-            age={this.state.age} presentAges={this.state.presentAges}></SearchComponent>
+            age={this.state.age} presentAges={this.state.presentAges}
+            ></SearchComponent>
           {this.state.spinner &&
             <div style={{ 'display': 'flex', 'flexDirection': 'column', 'alignItems': 'center' }}>
               <CircularProgress style={{ 'position': 'absolute', 'top': '50%', 'left': '50%' }} size={80} thickness={5} />
